@@ -29,7 +29,9 @@ Other Docker recipes I found use `network=host` and `root` user, which I wanted 
 - udp2raw receives NET_RAW capability to work as non-root
 - Container gets NET_ADMIN to be able to update iptables rules
 - su-exec is used to downgrade to non-root
+- `fix-gro` parameter is added as my systems seem to require it
 
 ## Notes:
 - No udp2raw client recipe
 - When used with Wireguard, the overhead added by udp2raw can be significant on a weak system, even with `cipher-mode none` and `auth-mode none`.
+- Also with Wireguard, the MTU size should be reduced to allow for the udp2raw header. `MTU=1342` seems to work for me.
